@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>💃 Virtual Dress Try-On (Client-side Overlay)</title>
+<style>
+  body { 
+    font-family: Arial, sans-serif; 
+    text-align: center; 
+    padding: 20px; 
+    background: #fffafc; 
+  }
+  .tryon-area { 
+    position: relative; 
+    display: inline-block; 
+    width: 360px;
+    height: 480px;
+  }
+  video, #snapshot, #dressOverlay { 
+    width: 360px; 
+    height: 480px; 
+    object-fit: cover; 
+    border-radius: 8px; 
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  #snapshot, #dressOverlay {
+    display: none;
+    pointer-events: none; /* so clicks pass through */
+  }
+  button {
+    background-color: #ff80ab;
+    border: none;
+    padding: 10px 16px;
+    margin: 5px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    color: white;
+  }
+  button:hover {
+    background-color: #ff4081;
+  }
+</style>
+</head>
+<body>
+<h2>💃 Virtual Dress Try-On (Client-side Overlay)</h2>
+
+<div class="tryon-area">
+  <video id="video" autoplay></video>
+  <img id="snapshot" />
+  <img id="dressOverlay" />
+</div>
+
+<br>
+<button id="snapBtn">📸 Take Snapshot</button>
+<button id="showLive">🔁 Back to Live</button>
+
+<script>
+const video = document.getElementById('video');
+const snapshot = document.getElementById('snapshot');
+const dressOverlay = document.getElementById('dressOverlay');
+const snapBtn = document.getElementById('snapBtn');
+const showLive = document.getElementById('showLive');
+const canvas = document.createElement('canvas');
+
+// ✅ Updated dress image link
+const dressImageUrl = 'https://i.postimg.cc/rwWy86Dh/Screenshot-2025-11-24-102218.png';
+
+// Access the camera
+navigator.mediaDevices.getUserMedia({ video: true })
+  .then(stream => { video.srcObject = stream; })
+  .catch(e => alert('Camera access needed: ' + e.message));
+
+// Take snapshot and overlay dress
+snapBtn.addEventListener('click', () => {
+  // Draw snapshot from live video
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
+  const ctx = canvas.getContext('2d');
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+  // Show snapshot image and hide video
+  snapshot.src = canvas.toDataURL('image/png');
+  video.style.display = 'none';
+  snapshot.style.display = 'block';
+
+  // Show dress overlay image positioned absolutely over snapshot
+  dressOverlay.src = dressImageUrl;
+  dressOverlay.style.display = 'block';
+});
+
+// Back to live video feed
+showLive.addEventListener('click', () => {
+  snapshot.style.display = 'none';
+  dressOverlay.style.display = 'none';
+  video.style.display = 'inline-block';
+});
+</script>
+</body>
+</html>

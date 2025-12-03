@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reward Points</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f8f9fb;
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        #pointsContainer {
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            display: inline-block;
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 30px;
+        }
+
+        #pointsDisplay {
+            font-size: 2em;
+            color: #007bff;
+            margin: 15px 0;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .progress-container {
+            width: 80%;
+            background: #ddd;
+            border-radius: 10px;
+            margin: 20px auto;
+            height: 25px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #4CAF50;
+            width: 0%;
+            border-radius: 10px;
+            transition: width 0.5s;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>💎 Reward Points Program</h1>
+    <div id="pointsContainer">
+        <p>Earn <b>5 points</b> for every ₹10,000 you spend!</p>
+        <p>If you reach <b>50 points</b>, you can shop items worth ₹10,000 for <b>FREE</b>!</p>
+
+        <div id="pointsDisplay">0</div>
+
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <button onclick="simulatePurchase()">Simulate ₹10,000 Purchase</button>
+        <p style="margin-top: 10px; font-size: 14px; color: gray;">Click the button to test your reward points.</p>
+    </div>
+
+    <script>
+        // Load points or set to 0 if none
+        let points = parseInt(localStorage.getItem("points")) || 0;
+
+        function displayPoints() {
+            document.getElementById("pointsDisplay").innerText = points + " Points";
+            updateProgressBar();
+        }
+
+        function simulatePurchase() {
+            points += 5;
+            if (points >= 50) {
+                alert("🎉 Congratulations! You've earned 50 points and can now get ₹10,000 worth of products FREE!");
+                points -= 50; // reset after redeem
+            }
+            localStorage.setItem("points", points);
+            displayPoints();
+        }
+
+        function updateProgressBar() {
+            const percent = (points / 50) * 100;
+            document.getElementById("progressBar").style.width = percent + "%";
+        }
+
+        // Initialize display when page loads
+        displayPoints();
+    </script>
+
+</body>
+</html>

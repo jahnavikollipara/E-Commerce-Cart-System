@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Visual Try-on | Watch Demo</title>
+   <link rel="stylesheet" href="styles.css"/>
+</head>
+<body>
+
+  <div class="navbar">
+    <div class="company"><h2>Ecommerce</h2></div>
+    <div class="products">
+      <ul>
+        <li><a href="home.html" style="color:white;text-decoration:none;">Home</a></li>
+        <li>Watch</li>
+        <li><a href="cart.html" style="color:white;text-decoration:none;">Cart</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="product-detail">
+    <div class="pro-left">
+      <!-- Updated image link -->
+      <img src="https://media.landmarkshops.in/cdn-cgi/image/h=150,w=150,q=85,fit=cover/lifestyle/1000013980420_01-2100.jpg" alt="Apple Smart Watch" />
+      <button class="tryon-btn" onclick="showTryon()">Visual Try-on</button>
+    </div>
+    <div class="pro-right">
+      <h4>Apple Watch Series 8</h4>
+      <ul>
+        <li>Deal Price: ₹39,900.00</li>
+        <li>MRP: ₹45,900.00</li>
+        <li>You Save: 13% (₹6,000)</li>
+      </ul>
+      <div class="pro-button">
+        <button class="addBtn" onclick='saveToCart({title:"Apple Watch Series 8", price:"39900"})'>ADD TO CART</button>
+        <button class="buyBtn" onclick="showBuyModal()">BUY NOW</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Visual Try-on Modal -->
+  <div id="tryonModal">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeTryon()">&times;</span>
+      <h3>Try-on Demo</h3>
+      <input type="file" id="userImageUpload" accept="image/*" onchange="showWatchImage(event)" />
+      <div>
+        <img id="userImagePreview" alt="Your Uploaded Hand" />
+      </div>
+      <p>(Demo) Upload your hand image — it will automatically show the hand with watch!</p>
+    </div>
+  </div>
+
+  <!-- Buy Modal -->
+  <div id="buyModal" style="display:none;">
+    <div class="modal-content">
+      <span class="close-modal" onclick="closeBuyModal()">&times;</span>
+      <h3>Order Details</h3>
+      <form onsubmit="event.preventDefault();submitOrder();">
+        <input type="text" id="address" placeholder="Enter your address" required style="width:90%;padding:7px;margin:9px 0;border-radius:6px;border:1px solid #ddd;" />
+        <select id="time" required style="width:93%;padding:7px;border-radius:6px;margin-bottom:10px;">
+          <option value="">Select delivery slot</option>
+          <option>Tomorrow, 9:00am-1:00pm</option>
+          <option>Tomorrow, 2:00pm-6:00pm</option>
+        </select>
+        <div>Delivery Charges: <b>₹40</b></div>
+        <button type="submit" class="buyBtn" style="width:80%;">Book Now</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function showBuyModal() {
+      document.getElementById('buyModal').style.display = 'flex';
+    }
+    function closeBuyModal() {
+      document.getElementById('buyModal').style.display = 'none';
+    }
+    function submitOrder() {
+      alert("Order Confirmed!");
+      closeBuyModal();
+    }
+
+    function showTryon() {
+      document.getElementById('tryonModal').style.display = 'flex';
+    }
+    function closeTryon() {
+      document.getElementById('tryonModal').style.display = 'none';
+    }
+
+    // Try-on logic
+    function showWatchImage(event) {
+      const img = document.getElementById('userImagePreview');
+      // Step 1: show uploaded image first
+      img.src = URL.createObjectURL(event.target.files[0]);
+      img.style.display = 'block';
+      // Step 2: after 1.5 seconds, switch to the hand-with-watch image
+      setTimeout(() => {
+        img.src = "https://cdn.fynd.com/v2/falling-surf-7c8bb8/fyprod/wrkr/products/pictures/item/free/original/000000410483450001/GC2Y4a-RefB-AX5617-3P-10.jpg";
+      }, 1500);
+    }
+
+    function saveToCart(product) {
+      let cart = JSON.parse(localStorage.getItem('cart') || "[]");
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Item added to cart!");
+    }
+  </script>
+
+</body>
+</html>

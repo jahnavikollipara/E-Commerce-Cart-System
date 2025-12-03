@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="styles.css"/>
+  <title>Tablet</title>
+</head>
+<body>
+  <div class="navbar">
+    <div class="company"><h2>Ecommerce</h2></div>
+    <div class="products">
+      <ul>
+        <li><a href="home.html" style="color:white;text-decoration:none;">Home</a></li>
+        <li>Laptop</li><li>Mobiles</li><li>AC</li><li>TV</li><li>Camera</li><li>Watch</li>
+        <li><a href="cart.html" style="color:white;text-decoration:none;">Cart</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="product-detail">
+    <div class="pro-left">
+      <img src="https://m.media-amazon.com/images/I/51s7SMOXbSL._UF1000,1000_QL80_.jpg" alt="Apple Tablets" />
+    </div>
+    <div class="pro-right">
+      <h4>Apple iPad 10.2 inch Retina Display, A13 Bionic Chip, 64GB Storage</h4>
+      <ul>
+        <li>Deal Price: ₹29,900.00</li>
+        <li>MRP: ₹34,900.00 (Inclusive of all taxes)</li>
+        <li>You Save: 14% (₹5,000)</li>
+      </ul>
+      <div class="pro-button">
+        <button class="addBtn" onclick='saveToCart({title:"Apple iPad 10.2 inch", price:"29900", image:"https://m.media-amazon.com/images/I/51s7SMOXbSL._UF1000,1000_QL80_.jpg"})'>ADD TO CART</button>
+        <button class="buyBtn" onclick="showBuyModal()">BUY NOW</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Buy Modal -->
+  <div id="buyModal">
+    <div class="modal-content">
+      <span class="close-buy-modal" onclick="closeBuyModal()">&times;</span>
+      <h3>Order Details</h3>
+      <form onsubmit="event.preventDefault();submitOrder();">
+        <input type="text" id="address" placeholder="Enter your address" required style="width:90%;padding:7px;margin:9px 0;border-radius:6px;border:1px solid #ddd;" />
+        <br />
+        <select id="time" required style="width:93%;padding:7px;border-radius:6px;margin-bottom:10px;">
+          <option value="">Select delivery slot</option>
+          <option>Tomorrow, 9:00am-1:00pm</option>
+          <option>Tomorrow, 2:00pm-6:00pm</option>
+        </select>
+        <br>
+        <div>Delivery Charges: <b>₹40</b></div>
+        <div>Offer: Use code <b>DIWALI2025</b> for 10% OFF.</div>
+        <button type="submit" class="buyBtn" style="width:80%;">Book Now</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="cart.js"></script>
+  <script>
+    function showBuyModal() {
+      document.getElementById('buyModal').style.display = 'flex';
+    }
+    function closeBuyModal() {
+      document.getElementById('buyModal').style.display = 'none';
+    }
+    function submitOrder() {
+      alert("Order Confirmed! You will receive your product soon.");
+      closeBuyModal();
+    }
+    function saveToCart(product) {
+      let cart = JSON.parse(localStorage.getItem('cart') || "[]");
+      cart.push(product);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert("Item added to cart!");
+    }
+  </script>
+</body>
+</html>

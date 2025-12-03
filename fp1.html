@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Products - Demo Shop</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .star {
+      cursor: pointer;
+      color: gray;
+      font-size: 1.2rem;
+    }
+    .star.filled {
+      color: #fbbf24; /* amber-400 */
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <!-- Navbar -->
+  <nav class="bg-white shadow">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-700">Demo Shop</h1>
+      <div>
+        <span id="user-phone" class="mr-4 text-gray-700 font-semibold"></span>
+        <button
+          onclick="logout()"
+          class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-3 gap-8" id="product-list"></main>
+
+  <script>
+    // Check if user is logged in
+    const phone = localStorage.getItem('phoneNumber');
+    if (!phone) {
+      window.location.href = 'login.html';
+    } else {
+      document.getElementById('user-phone').textContent = `User: ${phone}`;
+    }
+
+    // Product data
+    const products = [
+      {
+        id: 1,
+        name: 'Wireless Headphones',
+        price: 79,
+        use: 'Listen to music wirelessly with high quality sound.',
+        img: 'https://images.unsplash.com/photo-1511376777868-611b54f68947?auto=format&fit=crop&w=400&q=80',
+      },
+      {
+        id: 2,
+        name: 'Smart Watch',
+        price: 159,
+        use: 'Track your health and fitness on the go.',
+        img: 'https://images.unsplash.com/photo-1516574187841-cb9cc2ca948b?auto=format&fit=crop&w=400&q=80',
+      },
+      {
+        id: 3,
+        name: 'Gaming Mouse',
+        price: 49,
+        use: 'Ergonomic and precise mouse for gaming.',
+        img: 'https://images.unsplash.com/photo-1585386959984-a41552275fe6?auto=format&fit=crop&w=400&q=80',
+      },
+    ];
+
+    const cart = [];
+
+    function renderStars(productId, rating) {
+      let starsHtml = '';
+      for (let i = 1; i <= 5; i++) {
+        starsHtml += `<span class="star ${i <= rating ? 'filled' : ''}" data-id="${productId}" data-star="${i}">&#9733;</span>`;
+      }
+      return starsHtml;
+    }
+
+    function renderProducts() {
+      const container = document.getElementById('product-list');
+      container.innerHTML = '';
+      products.forEach((p) => {
+        container.innerHTML += `
+          <div class="bg-white shadow-md rounded-lg p-5 flex flex-col justify-between">
+            <img src="${p.img}" alt="${p.name}" class="h-44 w-full object-cover rounded mb-4" />
+            <h2 class="font-bold text-xl mb-1">${p.name}</h2>
+            <p class="text-blue-700 font-semibold mb-2">$${p.price}</p>
+            <div class="mb-2" id="rating-${p.id}">${renderStars(p.id, 0)}</div>
+            <p class="text-gray-600 mb-4">${p.use}</p>
+            <button
+              onclick="addToCart(${p.id})"
+              class="bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition"
+            >
+              Add to Cart
+            </button>
+          </div>
+        `;
+      });
+
+      // Attach star click events for rating
+      document.querySelectorAll('.star').forEach((star) => {
+        star.addEventListener('click', (e) => {
+          const productId = parseInt(e.target.getAttribute('data-id'));
+          const rating = parseInt(e.target.getAttribute('data-star'));
+          setRating(productId, rating);
+        });
+      });
+    }
+
+    const productRatings = {};
+
+    function setRating(productId, rating) {
+      productRatings[productId] = rating;
+      const ratingDiv = document.getElementById(`rating-${productId}`);
+      ratingDiv.innerHTML = renderStars(productId, rating);
+
+      // Reattach event listeners after re-rendering stars
+      ratingDiv.querySelectorAll('.star').forEach((star) => {
+        star.addEventListener('click', (e) => {
+          const pid = parseInt(e.target.getAttribute('data-id'));
+          const rate = parseInt(e.target.getAttribute('data-star'));
+          setRating(pid, rate);
+        });
+      });
+    }
+
+    function addToCart(productId) {
+      const prod = products.find(p => p.id === productId);
+      const existing = cart.find(i => i.id === productId);
+      if (existing) {
+        alert('Product already in cart');
+        return;
+      }
+      cart.push(prod);
+      alert(`${prod.name} added to cart!`);
+    }
+
+    function logout() {
+      localStorage.removeItem('phoneNumber');
+      window.location.href = 'login.html';
+    }
+
+    renderProducts();
+  </script>
+</body>
+</html>

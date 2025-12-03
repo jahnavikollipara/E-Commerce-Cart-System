@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Royal Blue Satin Evening Gown</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #fffafc;
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: #232f3e;
+      color: white;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-size: 18px;
+      margin-right: 20px;
+    }
+
+    .product-container {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 40px;
+      gap: 50px;
+      flex-wrap: wrap;
+    }
+
+    .image-section {
+      text-align: center;
+    }
+
+    .image-section img {
+      width: 350px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    }
+
+    /* Try On Button below image */
+    .tryon-btn {
+      background-color: #febd69;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: 0.3s;
+    }
+
+    .tryon-btn:hover {
+      background-color: #f3a847;
+    }
+
+    .product-details {
+      max-width: 450px;
+      line-height: 1.8;
+    }
+
+    h2 {
+      color: #232f3e;
+    }
+
+    .price {
+      font-size: 18px;
+      margin-top: 10px;
+    }
+
+    .deal {
+      color: #b12704;
+      font-weight: bold;
+    }
+
+    .mrp {
+      text-decoration: line-through;
+      color: gray;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    .buttons button {
+      background-color: #febd69;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-right: 10px;
+      transition: 0.3s;
+    }
+
+    .buttons button:hover {
+      background-color: #f3a847;
+    }
+
+    footer {
+      text-align: center;
+      background-color: #232f3e;
+      color: white;
+      padding: 15px;
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <div class="navbar">
+    <h2>Royal Blue Satin Evening Gown</h2>
+    <a href="../evening.html">← Back to Evening Collection</a>
+  </div>
+
+  <!-- Product Section -->
+  <div class="product-container">
+    <div class="image-section">
+      <img src="data:image/jpeg;base64,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" alt="Royal Blue Satin Evening Gown" />
+      <br />
+      <a href="vs.html"><button class="tryon-btn">🌙 Try On</button></a>
+    </div>
+
+    <div class="product-details">
+      <h2>Royal Blue Satin Evening Gown 💙</h2>
+      <p>This luxurious satin gown offers a royal look with a soft, glossy finish. Its elegant silhouette makes it perfect for evening parties, receptions, and special occasions.</p>
+
+      <div class="price">
+        <p><span class="deal">Deal Price: ₹2,499.00</span></p>
+        <p><span class="mrp">MRP: ₹2,999.00</span> (Inclusive of all taxes)</p>
+        <p>You Save: <b>17%</b> (₹500)</p>
+      </div>
+
+      <div class="buttons">
+        <a href="cart.html"><button class="cart-but">Add to Cart 🛒</button></a>
+        <a href="buy.html"><button class="cart-but">Buy Now 💖</button></a>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Women’s Fashion & Style | Designed with ❤️ by Janu</p>
+  </footer>
+
+</body>
+</html>

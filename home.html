@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Ecommerce Home</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+
+    /* 🧡 Loyalty Points Bar */
+    .points-bar {
+      background: #f0f8ff;
+      padding: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 2px solid #ddd;
+    }
+    .points-bar button {
+      background: #ff9800;
+      border: none;
+      color: white;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .points-bar button:hover { background: #e68900; }
+
+    /* 🔍 Search Bar Styling */
+    .search-bar {
+      display: flex;
+      align-items: center;
+      background: white;
+      border-radius: 30px;
+      padding: 6px 10px;
+      box-shadow: 0 3px 8px rgba(255, 126, 95, 0.25);
+      transition: all 0.3s ease;
+      margin-left: 20px;
+    }
+    .search-bar:hover {
+      box-shadow: 0 4px 14px rgba(255, 126, 95, 0.4);
+    }
+    .search-bar input {
+      border: none;
+      outline: none;
+      padding: 8px 12px;
+      border-radius: 30px;
+      font-size: 1rem;
+      width: 180px;
+      color: #333;
+    }
+    .search-btn {
+      background: linear-gradient(90deg, #ff7e5f, #feb47b);
+      border: none;
+      color: white;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 8px 14px;
+      border-radius: 30px;
+      cursor: pointer;
+      margin-left: 6px;
+      transition: all 0.3s ease;
+    }
+    .search-btn:hover {
+      background: linear-gradient(90deg, #ff9068, #fdc08b);
+      box-shadow: 0 4px 10px rgba(255, 126, 95, 0.3);
+    }
+
+    /* 📱 Responsive */
+    @media (max-width: 900px) {
+      .search-bar {
+        margin-top: 10px;
+        width: 90%;
+      }
+      .search-bar input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 🧡 Loyalty Points Bar -->
+  <div class="points-bar">
+    <div><strong>Your Points:</strong> <span id="pointsDisplay">0</span></div>
+    <div>
+      <button onclick="simulatePurchase()">Simulate ₹10,000 Purchase</button>
+      <button onclick="window.location.href='spinwin.html'">🎯 Spin & Win</button>
+    </div>
+  </div>
+
+  <!-- 🌈 Main Section -->
+  <div class="main-section">
+    <div class="navbar">
+      <div style="margin-bottom: 5px;">
+        <a href="women.html" style="color:#232f3e; font-weight:bold; font-size:16px;">Women’s Fashion</a>
+      </div>
+
+      <div class="company"><h2>Ecommerce</h2></div>
+
+      <div class="products">
+        <ul>
+          <li><a href="home.html">Home</a></li>
+          <li>Laptop</li>
+          <li>Mobiles</li>
+          <li>AC</li>
+          <li>TV</li>
+          <li>Camera</li>
+          <li>Watch</li>
+          <li><a href="cart.html">Cart</a></li>
+        </ul>
+      </div>
+
+      <!-- 🔍 Added Search Bar -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search for products..." />
+        <button class="search-btn" onclick="searchProduct()">🔍</button>
+      </div>
+    </div>
+
+    <h2>New Products</h2>
+    <div class="category-section">
+      <ul>
+        <li><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="laptop" /><span>Laptop</span></li>
+        <li><img src="https://www.orionphotogroup.com/wp-content/uploads/2023/09/OPG-Blog-Best-Professional-Canon-Cameras-That-Should-Be-On-Every-Photographers-List-10-12-2023-scaled.jpg" alt="camera" /><span>Camera</span></li>
+        <li><img src="https://static.godrejenterprises.com/ac_selector_banner_cat_m_7e74b805de.webp" alt="AC" /><span>AC</span></li>
+        <li><img src="https://whirlpoolindia.vtexassets.com/arquivos/ids/165797-800-auto?v=638705348977430000&width=800&height=auto&aspect=true" alt="Fridge" /><span>Fridge</span></li>
+        <li><img src="https://m.media-amazon.com/images/I/51IXaNrORcL._UF1000,1000_QL80_.jpg" alt="Ipod" /><span>Ipod</span></li>
+        <li><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Phone" /><span>Phone</span></li>
+        <li><img src="https://images-cdn.ubuy.co.in/661a1ab34c4721068f07ef51-audioengine-a2-wireless-bluetooth-pc.jpg" alt="Speakers" /><span>Speakers</span></li>
+        <li><img src="https://m.media-amazon.com/images/I/51lYbJhOmbL._UF1000,1000_QL80_.jpg" alt="TV" /><span>TV</span></li>
+        <li><img src="https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?auto=format&fit=crop&w=400&q=80" alt="Watch" /><span>Watch</span></li>
+        <li><img src="https://images.samsung.com/is/image/samsung/assets/levant/smartphones/socialimage/tabs10/Ultra_ColorSelection_MoonstoneGray_MO_720x480.png?imbypass=true" alt="Tabs" /><span>Tabs</span></li>
+      </ul>
+    </div>
+
+    <h2>New Arrivals</h2>
+    <div class="arrival-section">
+      <div class="sub-section">
+        <ul>
+          <a href="aircondition.html"><li><img src="https://5.imimg.com/data5/SELLER/Default/2021/6/SB/HN/LE/4039017/samsung-split-air-conditioner-500x500.jpg" alt="Samsung Split AC 4 Star" /><span>Samsung Split AC 4 Star</span></li></a>
+          <a href="headphones.html"><li><img src="https://unixindia.in/cdn/shop/files/01_34af94b9-40d7-4956-805e-0cb7df907ef7.jpg?v=1747994450" alt="Boat Head Phones" /><span>Boat Head Phones</span></li></a>
+          <a href="ipod.html"><li><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Apple IPods" /><span>Apple IPods</span></li></a>
+          <a href="mixer.html"><li><img src="https://cdn.moglix.com/p/vtwmWggINNxMj-xxlarge.jpg" alt="Usha Mixer Giant" /><span>Usha Mixer Giant</span></li></a>
+          <a href="moblie.html"><li><img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=400&q=80" alt="Samsung Mobiles" /><span>Samsung Mobiles</span></li></a>
+          <a href="speaker.html"><li><img src="https://m.media-amazon.com/images/I/61C1YkP5lzL._UF1000,1000_QL80_.jpg" alt="Sony Speakers" /><span>Sony Speakers</span></li></a>
+          <a href="tabs.html"><li><img src="https://m.media-amazon.com/images/I/51s7SMOXbSL._UF1000,1000_QL80_.jpg" alt="Apple Tablets" /><span>Apple Tablets</span></li></a>
+          <a href="trimmer.html"><li><img src="https://assets.myntassets.com/w_412,q_30,dpr_3,fl_progressive,f_webp/assets/images/30112085/2024/9/26/9a59726f-935d-49fb-89fe-0762013a45a81727332497340-Philips-MG373265-All-in-One-Trimmer-with-60-Minutes-Runtime--1.jpg" alt="Philips Trimmer" /><span>Philips Trimmer</span></li></a>
+          <a href="tv.html"><li><img src="https://www.apple.com/newsroom/images/product/watch/standard/Apple_watch-series7_hero_09142021_big.jpg.slideshow-medium.jpg" alt="Apple Smart Watch" /><span>Apple Smart Watch</span></li></a>
+          <a href="laptop.html"><li><img src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?auto=format&fit=crop&w=400&q=80" alt="Dell Laptop" /><span>Dell Laptop</span></li></a>
+        </ul>
+      </div>
+    </div>
+
+  <!-- 💥 Global Pop-up Modal -->
+  <div id="popupModal">
+    <div class="modal-content">
+      <span class="close" onclick="closePopupModal()">&times;</span>
+      <h3 id="popupTitle">Offer & Discount!</h3>
+      <p id="popupContent">
+        Special Diwali Sale: Get FREE Delivery on orders above ₹2999!<br>
+        Use code <strong>DIWALI2025</strong> for an extra 10% OFF!
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // ⭐ Points Logic
+    let points = parseInt(localStorage.getItem("points")) || 0;
+    document.getElementById("pointsDisplay").innerText = points;
+
+    function simulatePurchase() {
+      points += 5;
+      if (points >= 50) {
+        alert("🎉 Congratulations! You’ve earned 50 points! You can now redeem ₹10,000 worth of products for FREE!");
+        points -= 50; // reset after redemption
+      }
+      localStorage.setItem("points", points);
+      document.getElementById("pointsDisplay").innerText = points;
+    }
+
+    // 🎁 Popup
+    window.onload = function() {
+      setTimeout(() => {
+        document.getElementById('popupModal').style.display = 'flex';
+      }, 700);
+    };
+    function closePopupModal() {
+      document.getElementById('popupModal').style.display = 'none';
+    }
+
+    // 🔎 Simple Search Function
+    function searchProduct() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      const items = document.querySelectorAll(".category-section ul li, .arrival-section ul li");
+      let found = false;
+
+      items.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        if (text.includes(query)) {
+          item.style.display = "inline-block";
+          found = true;
+        } else {
+          item.style.display = "none";
+        }
+      });
+
+      if (!found) {
+        alert("❌ No products found for: " + query);
+      }
+    }
+  </script>
+</body>
+</html>

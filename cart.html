@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+  <title>Product Page</title>
+  <style>
+    .product-card {
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 16px;
+      max-width: 280px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      background: white;
+    }
+    .product-card img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin-bottom: 12px;
+    }
+    .product-name {
+      font-size: 20px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    .product-price {
+      color: #e67e22;
+      font-weight: 600;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+    .add-cart-btn {
+      background-color: #ff9800;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 25px;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    .add-cart-btn:hover {
+      background-color: #e68900;
+    }
+    .cart-summary {
+      max-width: 400px;
+      margin: 20px auto;
+      background: #fff3e0;
+      border-radius: 10px;
+      padding: 12px 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .cart-summary h3 {
+      margin: 0 0 10px 0;
+      color: #bf360c;
+    }
+    .cart-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      color: #5d4037;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="product-card">
+    <button class="add-cart-btn" onclick="addToCart('Samsung Mobile', 15999)">Add to Cart</button>
+  </div>
+
+  <div class="cart-summary">
+    <h3>Shopping Cart (<span id="cartCount">0</span> items)</h3>
+    <ul id="cartItems" class="cart-items"></ul>
+  </div>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+    function addToCart(productName, productPrice) {
+      cart.push({name: productName, price: productPrice});
+      localStorage.setItem('cart', JSON.stringify(cart));
+      updateCartDisplay();
+      alert(productName + ' added to cart!');
+    }
+
+    function updateCartDisplay() {
+      const cartCount = cart.length;
+      document.getElementById('cartCount').innerText = cartCount;
+
+      const cartItems = document.getElementById('cartItems');
+      cartItems.innerHTML = '';
+      cart.forEach(item => {
+        let li = document.createElement('li');
+        li.textContent = `${item.name} - ₹${item.price}`;
+        cartItems.appendChild(li);
+      });
+    }
+
+    window.onload = () => {
+      updateCartDisplay();
+    };
+  </script>
+
+</body>
+</html>
